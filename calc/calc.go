@@ -1,10 +1,12 @@
 package main
 
-import "C"
 import (
+	"flag"
 	"fmt"
-	"reflect"
 )
+
+var param1 *string = flag.String("p1", "param1", "param1 usage")
+var param2 *int = flag.Int("p2", -1, "param2 usage")
 
 func main() {
 	//args := os.Args
@@ -204,19 +206,16 @@ func main() {
 	//sum1, sum2 := <-resultChan, <-resultChan
 	//fmt.Println(sum1, sum2)
 
-	stu := &Student{1, false, 10, "Tom"}
-	fmt.Println(stu, reflect.TypeOf(stu))
-	s := reflect.ValueOf(stu).Elem()
-	typeofT := s.Type()
-	for i := 0; i < s.NumField(); i++ {
-		f := s.Field(i)
-		fmt.Printf("%d: %s %s = %v\n", i, typeofT.Field(i).Name, f.Type(), f.Interface())
-	}
-
-	//cStr := C.CString("Hello, World")
-	////fmt.Println(cstr)
-	//C.printf("Hello world")
-	//C.free(unsafe.Pointer(cStr))
+	//stu := &Student{1, false, 10, "Tom"}
+	//fmt.Println(stu, reflect.TypeOf(stu))
+	//s := reflect.ValueOf(stu).Elem()
+	//typeofT := s.Type()
+	//for i := 0; i < s.NumField(); i++ {
+	//	f := s.Field(i)
+	//	fmt.Printf("%d: %s %s = %v\n", i, typeofT.Field(i).Name, f.Type(), f.Interface())
+	//}
+	flag.Parse()
+	fmt.Println(*param1, *param2)
 }
 
 type People interface {
