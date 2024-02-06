@@ -214,39 +214,77 @@ func main() {
 	//	f := s.Field(i)
 	//	fmt.Printf("%d: %s %s = %v\n", i, typeofT.Field(i).Name, f.Type(), f.Interface())
 	//}
-	flag.Parse()
-	fmt.Println(*param1, *param2)
+
+	//flag.Parse()
+	//fmt.Println(*param1, *param2)
+
+	//询问对象是否实现了某个接口
+	var peo Speaker
+	if _, ok := interface{}(&peo).(ISpeak); ok {
+		fmt.Println("I can speak")
+	}
+	if _, ok := interface{}(&peo).(IFly); ok {
+		fmt.Println("I can fly")
+	}
+	if _, ok := interface{}(&peo).(ISwim); ok {
+		fmt.Println("I can swim")
+	}
+	if _, ok := interface{}(&peo).(ISing); ok {
+		fmt.Println("I can sing")
+	}
+
 }
 
-type People interface {
+type ISpeak interface {
 	Speak()
 }
-
-type Student struct {
-	Id   int
-	Male bool
-	Age  int
-	Name string
+type IFly interface {
+	Fly()
+}
+type ISwim interface {
+	Swim()
+}
+type ISing interface {
+	Sing()
 }
 
-func (p *Student) Speak() {
-	fmt.Println("I'm a student")
+type Speaker struct {
 }
 
-type Teacher struct {
-}
+func (p *Speaker) Speak()       {}
+func (p *Speaker) Swim()        {}
+func (p *Speaker) Sing()        {}
+func (p *Speaker) Fly(s string) {}
 
-func (p *Teacher) Speak() {
-	fmt.Println("I'm a teacher")
-}
-
-func sum(values []int, resultChan chan int) {
-	sum := 0
-	for _, v := range values {
-		sum += v
-	}
-	resultChan <- sum
-}
+//type People interface {
+//	Speak()
+//}
+//
+//type Student struct {
+//	Id   int
+//	Male bool
+//	Age  int
+//	Name string
+//}
+//
+//func (p *Student) Speak() {
+//	fmt.Println("I'm a student")
+//}
+//
+//type Teacher struct {
+//}
+//
+//func (p *Teacher) Speak() {
+//	fmt.Println("I'm a teacher")
+//}
+//
+//func sum(values []int, resultChan chan int) {
+//	sum := 0
+//	for _, v := range values {
+//		sum += v
+//	}
+//	resultChan <- sum
+//}
 
 //type Student struct {
 //	id   int
